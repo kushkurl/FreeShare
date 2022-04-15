@@ -1,71 +1,113 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿body {
+    background: linear-gradient(to right, #ffffff, #e7e7e7);
+    font-family: Assistant, sans-serif;
+    min-height: 90vh;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.login {
+    color: white;
+    background: background: #136a8a;
+    margin: auto;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.2), 0px 10px 20px rgba(0,0,0,0.3), 0px 30px 60px 1px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    padding: 50px;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    .login .head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color:black;
+    }
+
+        .login .head .company {
+            font-size: 2.2em;
+        }
+
+    .login .msg {
+        text-align: center;
+    }
+
+    .login .form input[type=text].text {
+        border: none;
+        background: none;
+        box-shadow: 0px 2px 0px 0px white;
+        width: 100%;
+        color: white;
+        font-size: 1em;
+        outline: none;
+        border-radius: 5px;
+        color: black;
+    }
+
+    .login .form .text::placeholder {
+        color: #D3D3D3;
+    }
+
+    .login .form input[type=password].password {
+        border: none;
+        background: none;
+        box-shadow: 0px 2px 0px 0px white;
+        width: 100%;
+        color: white;
+        font-size: 1em;
+        outline: none;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        color: black;
+    }
+
+    .login .form .password::placeholder {
+        color: #D3D3D3;
+    }
+
+    .login .form .btn-login {
+        background: none;
+        text-decoration: none;
+        color: white;
+        box-shadow: 0px 0px 8px 5px black;
+        border-radius: 3px;
+        padding: 5px 2em;
+        transition: 0.5s;
+        border-radius: 7px;
+        color: black;
+    }
+
+        .login .form .btn-login:hover {
+            background: white;
+            color: dimgray;
+            transition: 0.5s;
+        }
+
+    .login .forgot {
+        text-decoration: none;
+        color: white;
+        float: right;
+        color: black;
+    }
+
+footer {
+    position: absolute;
+    color: #136a8a;
+    bottom: 10px;
+    padding-left: 20px;
+    color: black;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+    footer p {
+        display: inline;
+    }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+    footer a {
+        color: green;
+        text-decoration: none;
+    }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
+        footer a:hover {
+            text-decoration: underline;
+        }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
-}
+    footer .heart {
+        color: #B22222;
+        font-size: 1.5em
+    }
