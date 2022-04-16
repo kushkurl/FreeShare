@@ -4,20 +4,49 @@ using FreeShare.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FreeShare.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220415205250_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("FreeShare.Models.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CIdNameToken")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ISBN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CIdNameToken");
+
+                    b.ToTable("Book");
+                });
 
             modelBuilder.Entity("FreeShare.Models.Category", b =>
                 {
@@ -45,33 +74,6 @@ namespace FreeShare.Data.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("CategoryType");
-                });
-
-            modelBuilder.Entity("FreeShare.Models.Data", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CIdNameToken")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CIdNameToken");
-
-                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -274,6 +276,15 @@ namespace FreeShare.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FreeShare.Models.Book", b =>
+                {
+                    b.HasOne("FreeShare.Models.Category", "CId")
+                        .WithMany("Books")
+                        .HasForeignKey("CIdNameToken");
+
+                    b.Navigation("CId");
+                });
+
             modelBuilder.Entity("FreeShare.Models.Category", b =>
                 {
                     b.HasOne("FreeShare.Models.CategoryType", "TypeId")
@@ -281,15 +292,6 @@ namespace FreeShare.Data.Migrations
                         .HasForeignKey("TypeIdName");
 
                     b.Navigation("TypeId");
-                });
-
-            modelBuilder.Entity("FreeShare.Models.Data", b =>
-                {
-                    b.HasOne("FreeShare.Models.Category", "CId")
-                        .WithMany("Books")
-                        .HasForeignKey("CIdNameToken");
-
-                    b.Navigation("CId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

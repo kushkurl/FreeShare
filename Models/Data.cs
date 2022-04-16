@@ -9,7 +9,7 @@ namespace FreeShare.Models
 {
     // Models represent any table we want in the database
 
-    public class Book
+    public class Data
     {
         // This will create an Id value automatically, we do not need to pass a value
         [Key]
@@ -33,7 +33,7 @@ namespace FreeShare.Models
 
         public string NameToken { get; set; }
         public string Description { get; set; }
-        public ICollection<Book> Books { get; set; }
+        public ICollection<Data> Books { get; set; }
         public virtual CategoryType TypeId { get; set; }
     }
 

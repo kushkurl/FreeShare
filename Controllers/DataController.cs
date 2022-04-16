@@ -9,11 +9,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreeShare.Controllers
 {
-    // We need to add api calls for DataTables to retrieve all books in json format and also to delete
-    // That is why we needed to create web api (this controller), to make api calls
-
-    [Route("api/Data")]
-    [ApiController]
     public class DataController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -24,13 +19,13 @@ namespace FreeShare.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult Index()
         {
-            return Json(new { data = await _db.Book.ToListAsync() });
+            return View(Json(new { data =  _db.Book.ToListAsync() }));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Index(int id)
         {
             var bookFromDb = await _db.Book.FirstOrDefaultAsync(b => b.Id == id);
 

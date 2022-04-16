@@ -22,7 +22,7 @@ namespace FreeShare.Data
         }
 
         // In order to add any model to the database, we need an entry here
-        public DbSet<Book> Book { get; set; }
+        public DbSet<Models.Data> Book { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<CategoryType> CategoryType { get; set; }
 
