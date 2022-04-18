@@ -21,23 +21,41 @@ namespace FreeShare.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(Json(new { data =  _db.Book.ToListAsync() }));
+            return View(Json(new { data =  _db.Data.ToListAsync() }));
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Index(int id)
+        [HttpPost]
+        public IActionResult Create(FreeShare.Models.Data data)
         {
-            var bookFromDb = await _db.Book.FirstOrDefaultAsync(b => b.Id == id);
-
-            if (bookFromDb == null)
+            if (data == null)
             {
-                return Json(new { success = false, message = "Error while deleting" });
+                return View(Json(new { success = false, message = "Error while Creating" }));
             }
 
-            _db.Book.Remove(bookFromDb);
-            await _db.SaveChangesAsync();
+            _db.Data.Add(data);
+            _db.SaveChangesAsync();
 
-            return Json(new { success = true, message = "Delete successful" });
+            return View(Json(new { success = true, message = "Added successful" }));
+        }
+
+        [HttpPatch]
+        public IActionResult Edit(FreeShare.Models.Data data)
+        {
+            var FromDb = _db.Data.FirstOrDefault(b => b.Id == data.Id);
+
+            if (FromDb == null)
+            {
+                return View(Json(new { success = false, message = "Error while Editing" }));
+            }
+            FromDb.Name = data.Name;
+            FromDb.Author = data.Author;
+            FromDb.ISBN = data.ISBN;
+            FromDb.CId = data.CId;
+
+            _db.Data.Remove(FromDb);
+            _db.SaveChangesAsync();
+
+            return View(Json(new { success = true, message = "Delete successful" }));
         }
     }
 }

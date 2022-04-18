@@ -12,7 +12,7 @@ namespace FreeShare.Views
         private readonly ApplicationDbContext _db;
 
         [BindProperty]
-        public Models.Data Book { get; set; }
+        public Models.Data Data { get; set; }
 
         public EditModel(ApplicationDbContext db)
         {
@@ -22,17 +22,17 @@ namespace FreeShare.Views
         // We pass Id as a parameter from Index page view when user clicks Edit
         public async Task OnGet(int id)
         {
-            Book = await _db.Book.FindAsync(id);
+            Data = await _db.Data.FindAsync(id);
         }
 
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
-                Models.Data bookFromDb = await _db.Book.FindAsync(Book.Id);
-                bookFromDb.Name = Book.Name;
-                bookFromDb.Author = Book.Author;
-                bookFromDb.ISBN = Book.ISBN;
+                Models.Data bookFromDb = await _db.Data.FindAsync(Data.Id);
+                bookFromDb.Name = Data.Name;
+                bookFromDb.Author = Data.Author;
+                bookFromDb.ISBN = Data.ISBN;
 
                 await _db.SaveChangesAsync();
 

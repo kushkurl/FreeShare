@@ -13,38 +13,38 @@
 
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="Book.Name"></label>
+                <label asp-for="Data.Name"></label>
             </div>
 
             <div class="col-6">
-                <input asp-for="Book.Name" class="form-control" />
+                <input asp-for="Data.Name" class="form-control" />
             </div>
 
-            <span asp-validation-for="Book.Name" class="text-danger"></span>
+            <span asp-validation-for="Data.Name" class="text-danger"></span>
         </div>
 
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="Book.Author"></label>
+                <label asp-for="Data.Author"></label>
             </div>
 
             <div class="col-6">
-                <input asp-for="Book.Author" class="form-control" />
+                <input asp-for="Data.Author" class="form-control" />
             </div>
 
-            <span asp-validation-for="Book.Author" class="text-danger"></span>
+            <span asp-validation-for="Data.Author" class="text-danger"></span>
         </div>
 
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="Book.ISBN"></label>
+                <label asp-for="Data.ISBN"></label>
             </div>
 
             <div class="col-6">
-                <input asp-for="Book.ISBN" class="form-control" />
+                <input asp-for="Data.ISBN" class="form-control" />
             </div>
 
-            <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+            <span asp-validation-for="Data.ISBN" class="text-danger"></span>
         </div>
 
 
@@ -70,7 +70,7 @@
                 <select id="category" asp-items="@(new SelectList(Model.Category,"NameToken","NameToken"))" class="form-control" />
             </div>
 
-            <span asp-validation-for="Book.CId" class="text-danger"></span>
+            <span asp-validation-for="Data.CId" class="text-danger"></span>
         </div>
 
 

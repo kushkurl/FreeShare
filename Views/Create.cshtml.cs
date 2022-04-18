@@ -14,7 +14,7 @@ namespace FreeShare.Views
 
         // Binding means, on post we get the property that is here
         [BindProperty]
-        public Models.Data Book { get; set; }
+        public Models.Data Data { get; set; }
         public IEnumerable<Category> Category { get; set; }
         public IEnumerable<CategoryType> CategoryType { get; set; }
         public CreateModel(ApplicationDbContext db)
@@ -43,7 +43,7 @@ namespace FreeShare.Views
             // ModelState.IsValid checks required areas in the model etc.
             if (ModelState.IsValid)
             {
-                await _db.Book.AddAsync(Book);
+                await _db.Data.AddAsync(Data);
                 await _db.SaveChangesAsync();
 
                 return RedirectToPage("Index");

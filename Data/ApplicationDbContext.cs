@@ -22,7 +22,7 @@ namespace FreeShare.Data
         }
 
         // In order to add any model to the database, we need an entry here
-        public DbSet<Models.Data> Book { get; set; }
+        public DbSet<Models.Data> Data { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<CategoryType> CategoryType { get; set; }
 
@@ -39,8 +39,8 @@ namespace FreeShare.Data
 
             var categoryType = new CategoryType[]
            {
-                new CategoryType { Name = "Fictional" },
-                new CategoryType { Name = "Non-Fictional" }
+                new CategoryType { Name = "Cover Letter" },
+                new CategoryType { Name = "Resume" }
            };
             var allcType = from c in context.CategoryType select c;
             context.CategoryType.RemoveRange(allcType);
@@ -55,15 +55,15 @@ namespace FreeShare.Data
 
             var category = new Category[]
            {
-                new Category { NameToken = "Action and Adventure",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Fictional"),
+                new Category { NameToken = "Action and Adventure",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Cover Letter"),
                     Description = "Action and Adventure" },
-                new Category { NameToken = "Crime",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Fictional"),
+                new Category { NameToken = "Crime",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Cover Letter"),
                     Description = "Crime" },
-                new Category { NameToken = "Drama",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Fictional"),
+                new Category { NameToken = "Drama",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Cover Letter"),
                     Description = "Drama" },
-                new Category { NameToken = "Dictionary",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Non-Fictional"),
+                new Category { NameToken = "Dictionary",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Resume"),
                     Description = "Dictionary" },
-                new Category { NameToken = "Humor",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Non-Fictional"),
+                new Category { NameToken = "Humor",     TypeId = context.CategoryType.FirstOrDefault(b => b.Name == "Resume"),
                     Description = "Humor" }
            };
             var allcategory = from c in context.Category select c;

@@ -29,11 +29,11 @@ namespace FreeShare.Models
     public class Category
     {
 
-        [Key, ForeignKey("Book")]
+        [Key, ForeignKey("Data")]
 
         public string NameToken { get; set; }
         public string Description { get; set; }
-        public ICollection<Data> Books { get; set; }
+        public ICollection<Data> Data { get; set; }
         public virtual CategoryType TypeId { get; set; }
     }
 
