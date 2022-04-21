@@ -24,6 +24,12 @@ namespace FreeShare.Controllers
             return View(Json(new { data =  _db.Data.ToListAsync() }));
         }
 
+        [HttpGet]
+        public IActionResult MyDashBoard()
+        {
+            return View(Json(new { data = _db.Data.ToListAsync() }));
+        }
+
         [HttpPost]
         public IActionResult Create(FreeShare.Models.Data data)
         {

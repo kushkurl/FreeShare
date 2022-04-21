@@ -13,6 +13,7 @@ namespace FreeShare.Models
     {
         // This will create an Id value automatically, we do not need to pass a value
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         // This means Name cannot be null
@@ -28,9 +29,7 @@ namespace FreeShare.Models
 
     public class Category
     {
-
-        [Key, ForeignKey("Data")]
-
+        [Key]
         public string NameToken { get; set; }
         public string Description { get; set; }
         public ICollection<Data> Data { get; set; }
@@ -43,7 +42,6 @@ namespace FreeShare.Models
 
         public ICollection<Category> Type { get; set; }
         [Key]
-        [ForeignKey("Category")]
         public string Name { get; set; }
 
     }

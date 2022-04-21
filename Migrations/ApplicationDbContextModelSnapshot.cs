@@ -4,16 +4,14 @@ using FreeShare.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FreeShare.Data.Migrations
+namespace FreeShare.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220416003828_first")]
-    partial class first
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,7 +71,7 @@ namespace FreeShare.Data.Migrations
 
                     b.HasIndex("CIdNameToken");
 
-                    b.ToTable("Book");
+                    b.ToTable("Data");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -139,6 +137,10 @@ namespace FreeShare.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -190,6 +192,8 @@ namespace FreeShare.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -276,6 +280,21 @@ namespace FreeShare.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FreeShare.Data.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("FreeShare.Models.Category", b =>
                 {
                     b.HasOne("FreeShare.Models.CategoryType", "TypeId")
@@ -288,7 +307,7 @@ namespace FreeShare.Data.Migrations
             modelBuilder.Entity("FreeShare.Models.Data", b =>
                 {
                     b.HasOne("FreeShare.Models.Category", "CId")
-                        .WithMany("Books")
+                        .WithMany("Data")
                         .HasForeignKey("CIdNameToken");
 
                     b.Navigation("CId");
@@ -347,7 +366,7 @@ namespace FreeShare.Data.Migrations
 
             modelBuilder.Entity("FreeShare.Models.Category", b =>
                 {
-                    b.Navigation("Books");
+                    b.Navigation("Data");
                 });
 
             modelBuilder.Entity("FreeShare.Models.CategoryType", b =>
