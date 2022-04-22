@@ -40,6 +40,7 @@ namespace FreeShare.Views
         // Task is IActionResult because we are redirecting to a new page
         public async Task<IActionResult> OnPost()
         {
+            Data.Author = User.Identity.Name;
             // ModelState.IsValid checks required areas in the model etc.
             if (ModelState.IsValid)
             {

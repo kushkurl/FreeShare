@@ -21,16 +21,21 @@ namespace FreeShare.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(Json(new { data =  _db.Data.ToListAsync() }));
+            /*var stData =  new List<Models.Data>();
+           var data = new Models.Data();
+            data.Name = "test";
+            stData = _db.Data.ToList();*/
+            return View(_db.Data.ToList());
         }
 
         [HttpGet]
         public IActionResult MyDashBoard()
         {
+            
             return View(Json(new { data = _db.Data.ToListAsync() }));
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Create(FreeShare.Models.Data data)
         {
             if (data == null)
@@ -44,7 +49,7 @@ namespace FreeShare.Controllers
             return View(Json(new { success = true, message = "Added successful" }));
         }
 
-        [HttpPatch]
+        [HttpGet]
         public IActionResult Edit(FreeShare.Models.Data data)
         {
             var FromDb = _db.Data.FirstOrDefault(b => b.Id == data.Id);
@@ -53,15 +58,15 @@ namespace FreeShare.Controllers
             {
                 return View(Json(new { success = false, message = "Error while Editing" }));
             }
-            FromDb.Name = data.Name;
+            /*FromDb.Name = data.Name;
             FromDb.Author = data.Author;
             FromDb.ISBN = data.ISBN;
             FromDb.CId = data.CId;
+            _db.Data.Update(data);
+            //_db.Data.Remove(FromDb);
+            _db.SaveChangesAsync();*/
 
-            _db.Data.Remove(FromDb);
-            _db.SaveChangesAsync();
-
-            return View(Json(new { success = true, message = "Delete successful" }));
+            return View(FromDb);
         }
     }
 }

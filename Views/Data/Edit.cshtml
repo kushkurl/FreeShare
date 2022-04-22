@@ -1,0 +1,66 @@
+﻿@model FreeShare.Models.Data
+
+<br />
+<h2 class="text-info">Edit Book</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    <form method="post">
+        <!-- We need to save the Id value here or Id will be default value (0) when we go to server side -->
+        <!-- In order to update the Book, we need the Id value on the server side -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Name"></label>
+            </div>
+
+            <!-- asp-for sets id, name etc. as well as setting the value of the input -->
+            <div class="col-6">
+                <input asp-for="Name" class="form-control" />
+            </div>
+
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Author"></label>
+            </div>
+
+            <div class="col-6">
+                <input asp-for="Author" class="form-control" />
+            </div>
+
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ISBN"></label>
+            </div>
+
+            <div class="col-6">
+                <input asp-for="ISBN" class="form-control" />
+            </div>
+
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <input type="submit" value="Update" class="btn btn-primary form-control" />
+            </div>
+
+            <div class="col-3">
+                <a asp-page="Index" class="btn btn-success form-control">Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

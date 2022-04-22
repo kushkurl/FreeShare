@@ -29,12 +29,19 @@ namespace FreeShare.Views
         {
             if (ModelState.IsValid)
             {
-                Models.Data bookFromDb = await _db.Data.FindAsync(Data.Id);
-                bookFromDb.Name = Data.Name;
-                bookFromDb.Author = Data.Author;
-                bookFromDb.ISBN = Data.ISBN;
+                var FromDb = _db.Data.FirstOrDefault(b => b.Id == Data.Id);
 
-                await _db.SaveChangesAsync();
+                if (FromDb == null)
+                {
+                    return RedirectToPage();
+                }
+                FromDb.Name = Data.Name;
+                FromDb.Author = Data.Author;
+                FromDb.ISBN = Data.ISBN;
+                FromDb.CId = Data.CId;
+                _db.Data.Update(Data);
+                //_db.Data.Remove(FromDb);
+                _db.SaveChanges();
 
                 return RedirectToPage("Index");
             }
